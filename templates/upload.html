@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<title>Clay</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">	
+	</head>
+	<body>
+		<div class="text-center container">
+			<div class="row">
+				<div>Carga archivos Clay</div>
+				<form method=POST enctype=multipart/form-data action="{{ url_for('upload') }}">
+					<label>Selecciona el archivo a cargar: </label>
+				    <input type=file name=excel class="inp">
+					<input type=submit value="upload" class="inp">
+				</form>
+			</div>
+		</div>
+
+		{% if proccess %}
+			<div>
+				Archivo cargado: {{filename}}
+			</div>
+		{% endif %}
+
+		{% if movimientos %}
+			<table class="table">
+				<thead>
+					<th>Fecha</th>
+					<th>Oficina</th>
+					<th>Descripcion</th>
+					<th>Numero de documento</th>
+					<th>Cargo</th>
+					<th>Abono</th>
+					<th>Saldo</th>
+				</thead>
+				<tbody>
+					{% for mov in movimientos %}
+						<tr>
+							<td>{{mov[1].strftime('%d-%m-%Y')}}</td>
+							<td>{{mov[2]}}</td>
+							<td>{{mov[3]}}</td>
+							<td>{{mov[4]}}</td>
+							<td>{{mov[5]}}</td>
+							<td>{{mov[6]}}</td>
+							<td>{{mov[7]}}</td>
+						</tr>
+		            {% endfor %}
+				</tbody>
+			</table>
+
+		{% endif %}
+		{% if err_sql %}
+			<div>Error al conectarse con la base de datos</div>
+		{% endif %}
+	</body>
+	<style type="text/css">
+		input.inp{
+			display: inline-block;
+		}
+		.text-center.container{
+			margin-top: 45px;
+		}
+	</style>
+</html>
