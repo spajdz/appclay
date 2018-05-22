@@ -5,16 +5,34 @@ import pyexcel as pe
 
 app = Flask(__name__)
 
-app.config['MYSQL_DATABASE_USER'] = 'sql10239032'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'X7WqIrwTgI'
-app.config['MYSQL_DATABASE_DB'] = 'sql10239032'
-app.config['MYSQL_DATABASE_HOST'] = 'sql10.freesqldatabase.com'
+# app.config['MYSQL_DATABASE_USER'] = 'sql10239032'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'X7WqIrwTgI'
+# app.config['MYSQL_DATABASE_DB'] = 'sql10239032'
+# app.config['MYSQL_DATABASE_HOST'] = 'sql10.freesqldatabase.com'
+
+# app.config['MYSQL_DATABASE_USER'] = 'epiz_22122370'
+# app.config['MYSQL_DATABASE_PASSWORD'] = '877666828'
+# app.config['MYSQL_DATABASE_DB'] = 'epiz_22122370_clay'
+# app.config['MYSQL_DATABASE_HOST'] = 'sql100.epizy.com'
+
+
+# app.config['MYSQL_DATABASE_USER'] = 'dbclay'
+# app.config['MYSQL_DATABASE_PASSWORD'] = 'dbclay123'
+# app.config['MYSQL_DATABASE_DB'] = 'dbclay'
+# app.config['MYSQL_DATABASE_HOST'] = 'db4free.net'
+
+app.config['MYSQL_DATABASE_USER'] = 'bdclay'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'bdclay123'
+app.config['MYSQL_DATABASE_DB'] = 'bdclay'
+app.config['MYSQL_DATABASE_HOST'] = 'db4free.net'
+
 
 mysql = MySQL()
 mysql.init_app(app)
 
-conn = mysql.connect()
-cursor = conn.cursor()
+if mysql.connect():
+    conn = mysql.connect()
+    cursor = conn.cursor()
 
 @app.route('/')
 def index():
